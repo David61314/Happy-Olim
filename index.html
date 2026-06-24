@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Happy-Olim — визуальный прототип</title>
+<style>
+:root{
+  color-scheme:dark;
+  --bg:#07111f;--ink:#f8efe0;--muted:#aeb7c7;--card:#101c2e;
+  --line:rgba(255,218,154,.18);--orange:#ff8a3d;--orange2:#ffb15f;
+  --gold:#d6a84f;--green:#2bd4a7;
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{
+ margin:0;color:var(--ink);
+ background:radial-gradient(circle at top left,rgba(255,138,61,.24),transparent 32rem),
+ radial-gradient(circle at 78% 0%,rgba(214,168,79,.2),transparent 30rem),
+ linear-gradient(135deg,#07111f,#0d1728 48%,#07111f);
+}
+a{color:inherit;text-decoration:none}.header{position:sticky;top:0;z-index:10;
+ backdrop-filter:blur(18px);background:rgba(7,17,31,.86);border-bottom:1px solid var(--line)}
+.nav{width:min(1180px,calc(100% - 28px));margin:auto;min-height:72px;display:flex;
+ align-items:center;justify-content:space-between;gap:18px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900}.mark{width:42px;height:42px;
+ display:grid;place-items:center;border-radius:14px;background:linear-gradient(135deg,var(--gold),var(--orange),#0d3b66)}
+.links{display:flex;gap:20px;color:var(--muted);font-size:.94rem}.cta{color:var(--orange2);font-weight:850}
+.hero{width:min(1180px,calc(100% - 28px));margin:auto;padding:64px 0 48px;display:grid;
+ grid-template-columns:1.08fr .72fr;gap:44px;align-items:center;min-height:calc(100vh - 72px)}
+.eyebrow{color:var(--orange2);font-size:.78rem;text-transform:uppercase;letter-spacing:.14em;font-weight:900}
+h1{font-size:clamp(3rem,7vw,5.8rem);line-height:.93;letter-spacing:-.07em;margin:.25em 0}
+.hero p{color:#c9d2df;line-height:1.65;font-size:1.12rem}.actions{display:flex;gap:12px;flex-wrap:wrap;margin:28px 0}
+.btn{display:inline-block;border:0;border-radius:999px;padding:15px 22px;font-weight:900;cursor:pointer}
+.primary{background:var(--orange);color:white;box-shadow:0 16px 32px rgba(255,138,61,.25)}
+.secondary{background:rgba(255,255,255,.08);color:var(--gold);border:1px solid var(--line)}
+.card{background:linear-gradient(180deg,rgba(16,28,46,.97),rgba(13,23,40,.94));
+ border:1px solid rgba(255,218,154,.2);border-radius:32px;box-shadow:0 26px 80px rgba(0,0,0,.36)}
+.form{padding:26px}.status{color:var(--green);font-weight:800;margin-bottom:16px}.dot{display:inline-block;width:10px;height:10px;
+ border-radius:50%;background:var(--green);margin-right:8px;box-shadow:0 0 0 7px rgba(43,212,167,.1)}
+label{display:grid;gap:8px;margin:15px 0;font-weight:750}select,textarea{width:100%;border:1px solid var(--line);
+ border-radius:18px;background:rgba(255,255,255,.07);padding:14px;color:var(--ink);font:inherit}
+.consent{padding:14px;border:1px solid var(--line);border-radius:20px;background:rgba(214,168,79,.08);font-size:.9rem}
+.upload{margin-top:14px;border:1.5px dashed rgba(214,168,79,.32);border-radius:20px;min-height:100px;
+ display:grid;place-items:center;text-align:center;color:var(--muted);padding:15px}
+.section{width:min(1180px,calc(100% - 28px));margin:auto;padding:66px 0}.section h2{font-size:clamp(2.2rem,4vw,3.6rem);letter-spacing:-.055em}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}.service{padding:24px;min-height:200px}.service .icon{
+ width:46px;height:46px;display:grid;place-items:center;border-radius:16px;background:linear-gradient(135deg,var(--orange),var(--orange2));
+ font-weight:900;margin-bottom:26px}.service p,.muted{color:var(--muted);line-height:1.6}
+.news{display:grid;grid-template-columns:.95fr 1.05fr;gap:20px}.feature{min-height:410px;padding:32px;display:flex;flex-direction:column;
+ justify-content:flex-end;border-radius:30px;background:linear-gradient(180deg,rgba(7,17,31,.05),rgba(7,17,31,.82)),
+ radial-gradient(circle at 18% 12%,rgba(255,138,61,.88),transparent 36%),linear-gradient(135deg,#0d3b66,#17324d)}
+.feature h3{font-size:clamp(2rem,4vw,3rem);line-height:1;letter-spacing:-.05em}.newslist{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.newscard{padding:22px;background:rgba(255,255,255,.07);border-radius:28px}.tag{display:inline-block;color:var(--orange2);
+ background:rgba(255,138,61,.14);border-radius:999px;padding:8px 12px;font-size:.78rem;font-weight:900}
+.flow{display:grid;grid-template-columns:.8fr 1fr;gap:36px;align-items:center}.steps{display:grid;gap:13px}
+.step{display:flex;align-items:center;gap:14px;padding:17px;border-radius:21px;background:rgba(255,255,255,.07);border:1px solid var(--line);font-weight:800}
+.num{width:38px;height:38px;display:grid;place-items:center;border-radius:13px;background:rgba(255,138,61,.16);color:var(--orange2)}
+.trust{display:grid;grid-template-columns:1fr 1fr;gap:18px}.trust .card{padding:30px}
+footer{text-align:center;color:var(--muted);padding:30px}
+.notice{position:fixed;left:12px;right:12px;bottom:12px;z-index:20;padding:12px 16px;border-radius:16px;
+ background:rgba(16,28,46,.96);border:1px solid var(--line);font-size:.88rem;box-shadow:0 12px 40px rgba(0,0,0,.4)}
+@media(max-width:880px){
+ .links{display:none}.hero,.grid,.news,.flow,.trust{grid-template-columns:1fr}.hero{padding-top:38px;gap:26px}
+ h1{font-size:clamp(2.8rem,14vw,4.8rem)}.newslist{grid-template-columns:1fr}.section{padding:44px 0}
+}
+@media(max-width:460px){.brand span:last-child{display:none}.btn{width:100%;text-align:center}}
+</style>
+</head>
+<body>
+<header class="header"><nav class="nav">
+<a class="brand" href="#top"><span class="mark">HO</span><span>Happy-Olim</span></a>
+<div class="links"><a href="#services">Услуги</a><a href="#process">Как работает</a><a href="#news">Новости</a><a href="#privacy">Безопасность</a></div>
+<a class="cta" href="#request">Создать заявку</a>
+</nav></header>
+
+<main id="top">
+<section class="hero">
+<div>
+<p class="eyebrow">Для русскоязычных olim в Израиле</p>
+<h1>Соберите документы и получите понятный следующий шаг</h1>
+<p>Happy-Olim помогает репатриантам разобраться с тлушем, пенсией, мешкантой, страховкой, переводами и сложными бюрократическими ситуациями — без хаоса и бесконечных голосовых сообщений.</p>
+<div class="actions"><a class="btn primary" href="#request">Начать заявку</a><a class="btn secondary" href="#services">Посмотреть услуги</a></div>
+<p class="muted">Мы не заменяем лицензированных специалистов. Если вопрос требует адвоката или консультанта, подготовим дело и передадим партнёру.</p>
+</div>
+
+<aside class="card form" id="request">
+<div class="status"><span class="dot"></span>Новая заявка</div>
+<h2>Что нужно проверить?</h2>
+<label>Тип задачи<select><option>Проверить тлуш / зарплатную ведомость</option><option>Пенсия и отчисления</option><option>Мешканта / ипотека</option><option>Страховка</option><option>Перевод документов</option></select></label>
+<label>Кратко опишите ситуацию<textarea rows="4" placeholder="Например: хочу понять, правильно ли начислили отпускные"></textarea></label>
+<div class="consent"><label style="display:flex;gap:10px;margin:0"><input id="agree" type="checkbox">Я принимаю условия обработки документов и согласен на передачу партнёру только по моей заявке.</label></div>
+<div class="upload" id="upload">Сначала примите согласие, затем загрузите документ</div>
+<button class="btn primary" style="width:100%;margin-top:14px" id="submit" disabled>Получить оценку стоимости</button>
+</aside>
+</section>
+
+<section class="section" id="services"><p class="eyebrow">MVP-направления</p><h2>С чего начнём</h2>
+<div class="grid">
+<article class="card service"><div class="icon">₪</div><h3>Тлуш</h3><p>Разбор начислений, удержаний, отпускных, больничных и пенсионных строк.</p></article>
+<article class="card service"><div class="icon">◷</div><h3>Пенсия</h3><p>Проверка фондов, взносов и недостающих данных.</p></article>
+<article class="card service"><div class="icon">⌂</div><h3>Мешканта</h3><p>Сбор вводных для банка или ипотечного консультанта.</p></article>
+<article class="card service"><div class="icon">✚</div><h3>Страховка</h3><p>Анкета по медицинским вводным и передача лицензированному партнёру.</p></article>
+<article class="card service"><div class="icon">文</div><h3>Переводы</h3><p>Загрузка документов, выбор цели и подготовка к подаче.</p></article>
+<article class="card service"><div class="icon">?</div><h3>Сложная ситуация</h3><p>Свободная заявка, которую администратор классифицирует вручную.</p></article>
+</div></section>
+
+<section class="section" id="news"><p class="eyebrow">Новости Израиля и репатриантов</p><h2>Что важно для olim</h2>
+<div class="news"><article class="feature"><span class="tag">Ежедневная подборка</span><h3>Льготы, документы, министерства и реальные проблемы</h3><p>Новости о правах olim, статистике, выплатах, бюрократии и важных сроках.</p></article>
+<div class="newslist">
+<article class="newscard"><span class="tag">Льготы</span><h3>Изменения в правах и выплатах</h3><p class="muted">Короткие объяснения новых правил.</p></article>
+<article class="newscard"><span class="tag">Документы</span><h3>Ошибки в ведомствах и банках</h3><p class="muted">Разбор типичных проблем.</p></article>
+<article class="newscard"><span class="tag">Статистика</span><h3>Данные министерств</h3><p class="muted">Информация о репатриации.</p></article>
+<article class="newscard"><span class="tag">Защита</span><h3>Буллинг и дискриминация</h3><p class="muted">Маршруты обращения за помощью.</p></article>
+</div></div></section>
+
+<section class="section flow" id="process"><div><p class="eyebrow">Процесс</p><h2>Клиент всегда понимает статус</h2><p class="muted">Заявка проходит путь от загрузки документов до результата или передачи партнёру.</p></div>
+<div class="steps"><div class="step"><span class="num">1</span>Выбор услуги и короткая анкета</div><div class="step"><span class="num">2</span>Загрузка файлов и согласие</div><div class="step"><span class="num">3</span>Оплата Bit, картой или переводом</div><div class="step"><span class="num">4</span>Результат или передача партнёру</div></div></section>
+
+<section class="section trust" id="privacy"><div class="card"><h2>Документы под контролем</h2><p class="muted">Авторизация, защищённая загрузка, журнал действий и удаление документов по запросу.</p></div>
+<div class="card"><h2>Честное позиционирование</h2><p class="muted">Сервис работает как помощник и координатор; лицензируемые услуги выполняют профильные специалисты.</p></div></section>
+</main>
+<footer>Happy-Olim · визуальный прототип</footer>
+<div class="notice">Это локальная интерактивная копия прототипа для просмотра. Она не отправляет данные и не принимает оплату.</div>
+<script>
+const agree=document.getElementById('agree'), submit=document.getElementById('submit'), upload=document.getElementById('upload');
+agree.addEventListener('change',()=>{submit.disabled=!agree.checked;upload.textContent=agree.checked?'Нажмите сюда, чтобы выбрать документ':'Сначала примите согласие, затем загрузите документ';});
+submit.addEventListener('click',()=>alert('Прототип: здесь появится расчёт стоимости и создание заявки.'));
+</script>
+</body></html>
